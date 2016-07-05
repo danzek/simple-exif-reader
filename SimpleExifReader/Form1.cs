@@ -17,22 +17,36 @@ namespace SimpleExifReader
             DialogResult r = openFileDialog1.ShowDialog();
             if (r == DialogResult.OK)
             {
-                // load exif data
-                IEnumerable<Directory> directories = ImageMetadataReader.ReadMetadata(openFileDialog1.FileName);
-
-                dataGridView1.Rows.Clear();
-                dataGridView1.Columns.Clear();
-                dataGridView1.AutoGenerateColumns = true;
-                dataGridView1.Columns.Add("ParentCategory", "ParentCategory");
-                dataGridView1.Columns.Add("TagName", "TagName");
-                dataGridView1.Columns.Add("TagValue", "Tag Value");
-
-                foreach (var directory in directories)
+                try
                 {
-                    foreach (var tag in directory.Tags)
+                    // load exif data
+                    IEnumerable<Directory> directories = ImageMetadataReader.ReadMetadata(openFileDialog1.FileName);
+
+                    string GpsLat = null;
+                    string GpsLong = null;
+
+                    dataGridView1.Rows.Clear();
+                    dataGridView1.Columns.Clear();
+                    dataGridView1.AutoGenerateColumns = true;
+                    dataGridView1.Columns.Add("ParentCategory", "Parent Category");
+                    dataGridView1.Columns.Add("TagName", "Tag Name");
+                    dataGridView1.Columns.Add("TagValue", "Tag Value");
+
+                    foreach (var directory in directories)
                     {
-                        dataGridView1.Rows.Add(directory.Name, tag.Name, tag.Description);
+                        foreach (var tag in directory.Tags)
+                            dataGridView1.Rows.Add(directory.Name, tag.Name, tag.Description);
+
+                        if (directory.HasError)
+                        {
+                            foreach (var error in directory.Errors)
+                                dataGridView1.Rows.Add("ERROR", "Error Message", error);
+                        }
                     }
+                }
+                catch (MetadataExtractor.ImageProcessingException)
+                {
+                    MessageBox.Show(String.Format("Simple EXIF Reader was unable to extract EXIF metadata from the file located at {0}", openFileDialog1.FileName));
                 }
             }
         }
