@@ -23,7 +23,9 @@ namespace SimpleExifReader
                     IEnumerable<Directory> directories = ImageMetadataReader.ReadMetadata(openFileDialog1.FileName);
 
                     string GpsLat = null;
+                    string GpsLatRef = null;
                     string GpsLong = null;
+                    string GpsLongRef = null;
 
                     dataGridView1.Rows.Clear();
                     dataGridView1.Columns.Clear();
@@ -35,7 +37,28 @@ namespace SimpleExifReader
                     foreach (var directory in directories)
                     {
                         foreach (var tag in directory.Tags)
+                        {
                             dataGridView1.Rows.Add(directory.Name, tag.Name, tag.Description);
+
+                            if (directory.Name.Trim() == "GPS")
+                            {
+                                switch (tag.Name.Trim())
+                                {
+                                    case "GPS Latitude":
+                                        GpsLat = tag.Name.Trim().Replace(" ", "");
+                                        break;
+                                    case "GPS Latitude Ref":
+                                        GpsLatRef = tag.Name.Trim().Replace(" ", "");
+                                        break;
+                                    case "GPS Longitude":
+                                        GpsLong = tag.Name.Trim().Replace(" ", "");
+                                        break;
+                                    case "GPS Longitude Ref":
+                                        GpsLongRef = tag.Name.Trim().Replace(" ", "");
+                                        break;
+                                }
+                            }
+                        }
 
                         if (directory.HasError)
                         {

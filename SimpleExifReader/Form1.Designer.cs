@@ -35,6 +35,7 @@
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.lblLinkToMap = new System.Windows.Forms.LinkLabel();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
@@ -97,11 +98,23 @@
             this.dataGridView1.Size = new System.Drawing.Size(668, 426);
             this.dataGridView1.TabIndex = 1;
             // 
+            // lblLinkToMap
+            // 
+            this.lblLinkToMap.AutoSize = true;
+            this.lblLinkToMap.Enabled = false;
+            this.lblLinkToMap.Location = new System.Drawing.Point(509, 5);
+            this.lblLinkToMap.Name = "lblLinkToMap";
+            this.lblLinkToMap.Size = new System.Drawing.Size(155, 13);
+            this.lblLinkToMap.TabIndex = 2;
+            this.lblLinkToMap.TabStop = true;
+            this.lblLinkToMap.Text = "View Location on Google Maps";
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(668, 450);
+            this.Controls.Add(this.lblLinkToMap);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
@@ -124,6 +137,7 @@
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.LinkLabel lblLinkToMap;
     }
 }
 
