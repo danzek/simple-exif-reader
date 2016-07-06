@@ -92,5 +92,11 @@ namespace SimpleExifReader
         {
             Process.Start(e.Link.LinkData as string);
         }
+
+        private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            AboutBox1 about = new AboutBox1();
+            about.ShowDialog();
+        }
     }
 }
