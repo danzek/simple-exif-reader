@@ -82,6 +82,11 @@ namespace SimpleExifReader
                         foreach (var error in directory.Errors)
                             dataGridView1.Rows.Add("ERROR", "Error Message", error);
                     }
+
+                    dataGridView1.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+                    dataGridView1.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+                    dataGridView1.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                    dataGridView1.AutoResizeColumns();
                 }
 
                 if (GpsLat != null && GpsLatRef != null && GpsLong != null && GpsLongRef != null)
@@ -93,14 +98,6 @@ namespace SimpleExifReader
             {
                 MessageBox.Show(String.Format("Simple EXIF Reader was unable to extract EXIF metadata from the file located at {0}", filename));
             }
-        }
-
-        private void dataGridView1_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
-        {
-            dataGridView1.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dataGridView1.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-            dataGridView1.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            dataGridView1.AutoResizeColumns();
         }
 
         void pictureBox1_DragEnter(object sender, DragEventArgs e)
