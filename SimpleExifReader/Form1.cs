@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Windows.Forms;
 using MetadataExtractor;
 
@@ -27,6 +28,10 @@ namespace SimpleExifReader
                     string GpsLong = null;
                     string GpsLongRef = null;
 
+                    // reset Google Maps link state
+                    lblLinkToMap.Links.Clear();
+                    lblLinkToMap.Enabled = false;
+
                     dataGridView1.Rows.Clear();
                     dataGridView1.Columns.Clear();
                     dataGridView1.AutoGenerateColumns = true;
@@ -45,16 +50,16 @@ namespace SimpleExifReader
                                 switch (tag.Name.Trim())
                                 {
                                     case "GPS Latitude":
-                                        GpsLat = tag.Name.Trim().Replace(" ", "");
+                                        GpsLat = tag.Description.Trim().Replace(" ", "").Replace("-", "");
                                         break;
                                     case "GPS Latitude Ref":
-                                        GpsLatRef = tag.Name.Trim().Replace(" ", "");
+                                        GpsLatRef = tag.Description.Trim().Replace(" ", "").Replace("-", "");
                                         break;
                                     case "GPS Longitude":
-                                        GpsLong = tag.Name.Trim().Replace(" ", "");
+                                        GpsLong = tag.Description.Trim().Replace(" ", "").Replace("-", "");
                                         break;
                                     case "GPS Longitude Ref":
-                                        GpsLongRef = tag.Name.Trim().Replace(" ", "");
+                                        GpsLongRef = tag.Description.Trim().Replace(" ", "").Replace("-", "");
                                         break;
                                 }
                             }
@@ -66,12 +71,26 @@ namespace SimpleExifReader
                                 dataGridView1.Rows.Add("ERROR", "Error Message", error);
                         }
                     }
+
+                    if (GpsLat != null && GpsLatRef != null && GpsLong != null && GpsLongRef != null)
+                    {
+                        lblLinkToMap.Enabled = true;
+                        string url = String.Format("https://www.google.com/maps/place/{0}{1}+{2}{3}", GpsLat, GpsLatRef, GpsLong, GpsLongRef);
+                        LinkLabel.Link link = new LinkLabel.Link();
+                        link.LinkData = url;
+                        lblLinkToMap.Links.Add(link);
+                    }
                 }
                 catch (MetadataExtractor.ImageProcessingException)
                 {
                     MessageBox.Show(String.Format("Simple EXIF Reader was unable to extract EXIF metadata from the file located at {0}", openFileDialog1.FileName));
                 }
             }
+        }
+
+        private void lblLinkToMap_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            Process.Start(e.Link.LinkData as string);
         }
     }
 }
