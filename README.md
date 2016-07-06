@@ -1,6 +1,20 @@
 # Simple EXIF Reader
 
-This is an image/movie metadata reader that provides a simplistic GUI interface to the [MetadataExtractor .NET library](https://github.com/drewnoakes/metadata-extractor-dotnet). The following forms of metadata are supported:
+This is an image/movie metadata reader that provides a simplistic GUI interface to the [MetadataExtractor .NET library](https://github.com/drewnoakes/metadata-extractor-dotnet). 
+
+## Simple User Interface
+
+Default UI:
+
+![Default GUI](screenshots/sevmain.PNG)
+
+After opening image:
+
+![Opened image... of Jerod](screenshots/sevmainpop.PNG)
+
+## Supported Metadata Forms
+
+The following forms of metadata are supported:
 
  - EXIF
  - IPTC
@@ -14,6 +28,8 @@ This is an image/movie metadata reader that provides a simplistic GUI interface 
  - GIF
  - ICO
  - PCX
+
+## Supported File Types
 
 It will process files of type:
 
