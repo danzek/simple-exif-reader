@@ -1,6 +1,12 @@
 # Simple EXIF Reader
 
-This is an image/movie metadata reader that provides a simplistic GUI interface to the [MetadataExtractor .NET library](https://github.com/drewnoakes/metadata-extractor-dotnet). 
+This is an image/movie metadata reader that provides a simplistic GUI interface to the [MetadataExtractor .NET library](https://github.com/drewnoakes/metadata-extractor-dotnet).
+
+## Download Compiled Assembly
+
+**NOTE:** You need to have the Microsoft .NET Framework 4.5 runtime installed in order for the [compiled assembly](http://4n68r.com/downloads/SimpleExifReader.zip) to work.
+
+[**Download Compiled Assembly (EXE)**](http://4n68r.com/downloads/SimpleExifReader.zip)
 
 ## Simple User Interface
 
